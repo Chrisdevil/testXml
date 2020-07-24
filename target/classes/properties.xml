@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8" ?>
+
+<pages xmlns="http://jboss.com/products/seam/pages">
+    <page>
+
+        <text>
+            ffffcccc
+        </text>
+        <length>
+            33
+        </length>
+        <width>
+            22
+        </width>
+        <view>
+            true
+        </view>
+    </page>
+</pages>
