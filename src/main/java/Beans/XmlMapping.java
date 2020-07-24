@@ -9,13 +9,13 @@ import java.io.PrintStream;
 
 public class XmlMapping {
     public static void main(String[] args) throws JAXBException {
-        File file = new File("test.xml");
-        Page page = new Page("see",33,22,true);
+        File file = new File("src/main/resources/properties.xml");
+
         JAXBContext context = JAXBContext.newInstance(Page.class);
         Marshaller marshaller = context.createMarshaller();
         marshaller.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT,Boolean.TRUE);
-        PrintStream out = System.out;
-        marshaller.marshal(page,file);
+
+        marshaller.marshal(file,System.out);
 
     }
 }

@@ -3,21 +3,28 @@ package Beans;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 
-@XmlRootElement
+@XmlRootElement(name = "page")
 public class Page {
     private String text;
     private int length;
     private int width;
     private boolean view;
+    private String name;
 
-    public Page(){
-
+    public String getName() {
+        return name;
     }
-    public Page(String text, int length, int width, boolean view) {
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public Page(String text, int length, int width, boolean view, String name) {
         this.text = text;
         this.length = length;
         this.width = width;
         this.view = view;
+        this.name = name;
     }
 
     @Override
@@ -27,8 +34,14 @@ public class Page {
                 ", length=" + length +
                 ", width=" + width +
                 ", view=" + view +
+                ", name='" + name + '\'' +
                 '}';
     }
+
+    public Page() {
+
+    }
+
 
     @XmlElement(name = "text")
     public String getText() {
