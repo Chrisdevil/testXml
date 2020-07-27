@@ -1,24 +1,39 @@
 <?xml version="1.0" encoding="utf-8" ?>
 
 <pages>
-    <page name="ssss">
-        <pagename>修改资产</pagename>
-        <form>
-            <formname>金币钻石</formname>
-            <userid>0</userid>
-            <!--钻石-->
-            <diamond>0</diamond>
-            <!--金币-->
-            <coin>0</coin>
-            <stage>0</stage>
-            <button>确定</button>
-        </form>
-        <form>
-            <formname>stage杯数</formname>
-            <userid>0</userid>
-            <stage>0</stage>
-            <cupnum>0</cupnum>
-            <button>确定</button>
-        </form>
+    <page name="queryOrder">
+        <userId>0</userId>
+        <button>提交</button>
+    </page>
+    <page name="queryChest">
+        <userId>0</userId>
+        <days>0</days>
+        <button>提交</button>
+    </page>
+    <page name="queryDisc">
+        <userId>0</userId>
+        <days>0</days>
+        <button>提交</button>
+    </page>
+    <page name="queryTrophies">
+        <userId>0</userId>
+        <days></days>
+        <button>提交</button>
+    </page>
+    <page name="queryAsset">
+        <userId>0</userId>
+        <days>0</days>
+        <button>提交</button>
+    </page>
+    <page name="queryLogin">
+        <userId>0</userId>
+        <days>0</days>
+        <button>提交</button>
+    </page>
+    <page name="queryMatch">
+        <userId>0</userId>
+        <days>0</days>
+        <tour>0</tour>
+        <button>提交</button>
     </page>
 </pages>

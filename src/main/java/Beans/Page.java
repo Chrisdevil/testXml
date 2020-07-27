@@ -1,16 +1,17 @@
 package Beans;
 
+import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 
-@XmlRootElement(name = "page")
+@XmlRootElement
 public class Page {
     private String text;
     private int length;
     private int width;
     private boolean view;
     private String name;
-
+    @XmlAttribute
     public String getName() {
         return name;
     }
@@ -78,4 +79,5 @@ public class Page {
     public void setView(boolean view) {
         this.view = view;
     }
+
 }

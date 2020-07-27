@@ -4,20 +4,19 @@ import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 import java.util.List;
 
-@XmlRootElement(name = "Pages")
+@XmlRootElement
 public class Pages {
-    public Pages(List<Page> list) {
-        this.list = list;
+    public Pages() {
     }
 
-    private List<Page>list;
-    @XmlElement(name = "Page")
+    private Page page;
 
-    public List<Page> getList() {
-        return list;
+    @XmlElement(name = "page")
+    public Page getPage() {
+        return page;
     }
 
-    public void setList(List<Page> list) {
-        this.list = list;
+    public void setPage(Page page) {
+        this.page = page;
     }
 }
