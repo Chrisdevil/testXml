@@ -1,5 +1,6 @@
 package Beans;
 
+
 import org.jdom2.Element;
 import org.jdom2.JDOMException;
 import org.jdom2.input.SAXBuilder;
@@ -8,6 +9,7 @@ import javax.xml.bind.*;
 import java.io.File;
 import java.io.IOException;
 import java.io.PrintStream;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -15,6 +17,15 @@ import java.util.Map;
 
 public class XmlMapping {
     public static void main(String[] args) throws JAXBException, JDOMException, IOException {
+
+
+
+
+
+
+
+
+
         SAXBuilder saxBuilder = new SAXBuilder();
         Element root = saxBuilder.build("src/main/resources/properties.xml").getDocument().getRootElement();
         System.out.println(root.getName());
@@ -33,5 +44,7 @@ public class XmlMapping {
                 System.out.println(element.getValue());
             }
         }
+        hashMap.forEach((k,v)-> System.out.println("k:"+k+" v:"+v));
+
     }
 }
