@@ -23,7 +23,5 @@ M
 src/main/java/Beans/Form.java,f\a\fa62f47fdf3fcde5d8583507333347949a15ac14
 O
 src/main/webapp/queryOrder.html,c\7\c71f3205d1d8d64238cc6f84b0fc455736310c33
-K
-src/main/resources/test.xml,e\1\e131141b74a1ae8c4e331e8da33d4c3fff7b8441
 7
 pom.xml,4\4\442292b8a7efeabbe4cc176709b833b1792140ec

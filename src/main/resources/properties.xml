@@ -6,8 +6,8 @@
         <button>提交</button>
     </page>
     <page name="queryChest">
-        <userId>0</userId>
-        <days>0</days>
+        <input name="userId">0</input>
+        <input name="days">0</input>
         <button>提交</button>
     </page>
     <page name="queryDisc">
