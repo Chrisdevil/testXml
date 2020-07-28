@@ -1,13 +1,9 @@
 <html>
 <body>
 <h2>Hello World!</h2>
+<div th:utext="name"></div>
+<p></p>
 
-<jsp:text>
-    <button>
-
-
-    </button>
-</jsp:text>
 <input type="button" name="">
 <input type="text">
 <textarea></textarea>

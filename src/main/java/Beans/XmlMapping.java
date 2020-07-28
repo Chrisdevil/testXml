@@ -1,6 +1,7 @@
 package Beans;
 
 
+import lombok.extern.slf4j.Slf4j;
 import org.jdom2.Element;
 import org.jdom2.JDOMException;
 import org.jdom2.input.SAXBuilder;
@@ -14,37 +15,40 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-
+@Slf4j
 public class XmlMapping {
-    public static void main(String[] args) throws JAXBException, JDOMException, IOException {
-
-
-
-
-
-
-
-
-
+    private HashMap<String,Element>nameElement;
+    public XmlMapping() throws JDOMException, IOException {
         SAXBuilder saxBuilder = new SAXBuilder();
         Element root = saxBuilder.build("src/main/resources/properties.xml").getDocument().getRootElement();
-        System.out.println(root.getName());
         List<Element>list = root.getChildren();
+        HashMap<String,Element>nameElement = new HashMap<>();
         for(Element e :list){
-            System.out.println(e.getAttribute("name").getValue());
+            nameElement.put(e.getAttribute("name").getValue(),e);
         }
-        HashMap<String,Element>hashMap = new HashMap<>();
-        for(Element e :list){
-            hashMap.put(e.getAttribute("name").getValue(),e);
-        }
-        for(Map.Entry<String,Element> entry:hashMap.entrySet()){
+        for(Map.Entry<String,Element> entry:nameElement.entrySet()){
             System.out.println(entry.getKey());
             List<Element>list1 = entry.getValue().getChildren();
+            System.out.println(entry.getValue().getChildren().size());
             for(Element element : list1){
                 System.out.println(element.getValue());
             }
         }
-        hashMap.forEach((k,v)-> System.out.println("k:"+k+" v:"+v));
+        nameElement.forEach((k,v)-> System.out.println("k:"+k+" v:"+v));
+    }
+   
+    public void sendMessage(String pageName,Element element){
 
+        StringBuffer stringBuffer = new StringBuffer();
+        stringBuffer.append("<form>");
+
+    }
+    public String testSendMessage(){
+        return "<form >userId:<input type=text><input type=submit></form>";
+    }
+    public static void main(String[] args) throws JAXBException, JDOMException, IOException {
+        new XmlMapping();
+        log.info("asdasd");
+        
     }
 }
