@@ -11,34 +11,31 @@ import org.jdom2.JDOMException;
 import java.io.IOException;
 
 public class TemplateVerticle extends AbstractVerticle {
-    XmlMapping xmlMapping = new XmlMapping();
     Router router;
     ThymeleafTemplateEngine thymeleafTemplateEngine;
-
-    public TemplateVerticle() throws JDOMException, IOException {
-    }
-
+    XmlMapping xmlMapping;
     @Override
     public void start(Promise<Void> startPromise) throws Exception {
+        xmlMapping= new XmlMapping();
         router = Router.router(vertx);
         thymeleafTemplateEngine = ThymeleafTemplateEngine.create(vertx);
-        router.route("/").handler(req -> {
+        router.route("/exe").handler(req -> {
             var obj = new JsonObject();
-            obj.put("another","ccc");
-            obj.put("name", xmlMapping.testSendMessage());
+            String string = xmlMapping.createElementString(xmlMapping.getElement("queryChest"));
+            System.out.println(string);
+            obj.put("name", string);
+            obj.put("another", "<form >userId:<input type=text><input type=submit></form>");
             thymeleafTemplateEngine.render(obj,
                     "Templates/index.html",
                     bufferAsyncResult -> {
-                        if (bufferAsyncResult.succeeded()) {
-                            req.response()
-                                    .putHeader("content-type", "text/html")
-                                    .end(bufferAsyncResult.result());
-                        }
+                        req.response()
+                                .putHeader("content-type", "text/html")
+                                .end(bufferAsyncResult.result());
                     });
 
         });
 
-        vertx.createHttpServer().requestHandler(router).listen(8888, http -> {
+        vertx.createHttpServer().requestHandler(router).listen(8890, http -> {
             if (http.succeeded()) {
                 startPromise.complete();
                 System.out.println("HTTP server started on port 8888");

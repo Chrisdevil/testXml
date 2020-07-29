@@ -1,39 +1,40 @@
 <?xml version="1.0" encoding="utf-8" ?>
 
 <pages>
-    <page name="queryOrder">
-        <userId>0</userId>
-        <button>提交</button>
+
+    <page name="queryLogin">
+        <form name="login" action="www.abc.com">
+            <input type="text" name="userId"/>0
+            <input type="text" name="days"/>0
+            <input type="submit"/>提交
+        </form>
     </page>
     <page name="queryChest">
-        <input name="userId">0</input>
-        <input name="days">0</input>
-        <button>提交</button>
-    </page>
-    <page name="queryDisc">
-        <userId>0</userId>
-        <days>0</days>
-        <button>提交</button>
+        <form name="queryDisc">
+            <input type="text" name="userId">0</input>
+            <input type="text" name="days">0</input>
+            <input type="submit">提交</input>
+        </form>
+        <form name="queryMatch">
+            <input type="text" name="userId">0</input>
+            <input type="text" name="days">0</input>
+            <input type="text" name="tour">0</input>
+            <input type="submit">提交</input>
+        </form>
     </page>
     <page name="queryTrophies">
-        <userId>0</userId>
-        <days></days>
-        <button>提交</button>
-    </page>
-    <page name="queryAsset">
-        <userId>0</userId>
-        <days>0</days>
-        <button>提交</button>
-    </page>
-    <page name="queryLogin">
-        <userId>0</userId>
-        <days>0</days>
-        <button>提交</button>
-    </page>
-    <page name="queryMatch">
-        <userId>0</userId>
-        <days>0</days>
-        <tour>0</tour>
-        <button>提交</button>
+        <form name="queryAsset">
+            <input type="text" name="userId">0</input>
+            <input type="text" name="days">0</input>
+            <input type="submit" name="ttt">提交</input>
+            <select name="sel">
+                <option value="1">广州</option>
+                <option value="2">深圳</option>
+                <option value="3">山东</option>
+                <option value="4">北京</option>
+            </select>
+        </form>
+
+        <text>321321cccc</text>
     </page>
 </pages>
