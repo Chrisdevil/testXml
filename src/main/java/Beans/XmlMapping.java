@@ -12,23 +12,28 @@ import java.util.*;
 
 @Slf4j
 public class XmlMapping {
-    private HashMap<String, Element> nameElement;
+    private HashMap<String, Element> pageElement;
+    private HashMap<String, Element> typeElement;
 
     public XmlMapping() throws JDOMException, IOException {
         SAXBuilder saxBuilder = new SAXBuilder();
         Element root = saxBuilder.build("src/main/resources/properties.xml").getDocument().getRootElement();
-        //System.out.println(root.getChild("page").getChild("form").getChild("userId").getValue());
-        List<Element> list = root.getChildren();
-        nameElement = new HashMap<>();
-        for (Element e : list) {
-            nameElement.put(e.getAttribute("name").getValue(), e);
+
+        List<Element> typeList = root.getChildren();
+        pageElement = new HashMap<>();
+        typeElement = new HashMap<>();
+        for (Element typeE : typeList) {
+            typeElement.put(typeE.getAttribute("name").getValue(), typeE);
+            List<Element> pageList = typeE.getChildren();
+            for (Element pageE : pageList) {
+                pageElement.put(pageE.getAttribute("name").getValue(), pageE);
+            }
         }
-        for (Map.Entry<String, Element> entry : nameElement.entrySet()) {
+        for (Map.Entry<String, Element> entry : pageElement.entrySet()) {
             System.out.println(entry.getKey());
             System.out.println(createElementString(entry.getValue()));
         }
     }
-
     public String createElementString(Element element) {
 
         StringBuilder stringBuilder = new StringBuilder();
@@ -53,10 +58,9 @@ public class XmlMapping {
                 stringBuilder.append(">");
                 //添加标签头完毕 进入递归
                 stringBuilder.append(createElementString((Element) child));
-                //如果不是单标签的情况 添加标签尾
-                if (((Element) child).getName() != "input") {
-                    stringBuilder.append("</" + ((Element) child).getName() + " >");
-                }
+                //添加标签尾
+                stringBuilder.append("</" + ((Element) child).getName() + " >");
+
             }
             if (child instanceof Text) {
                 stringBuilder.append(createTextString((Text) child));
@@ -69,7 +73,7 @@ public class XmlMapping {
     }
 
     public Element getElement(String str) {
-        return nameElement.get(str);
+        return pageElement.get(str);
     }
 
     public static void main(String[] args) throws JAXBException, JDOMException, IOException {
