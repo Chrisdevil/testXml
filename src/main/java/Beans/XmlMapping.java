@@ -12,8 +12,11 @@ import java.util.*;
 
 @Slf4j
 public class XmlMapping {
-    private HashMap<String, Element> pageElement;
-    private HashMap<String, Element> typeElement;
+
+    //页面名是键 对应的页面的element是值
+    private final HashMap<String, Element> pageElement;
+    //页面类型是键 对应的类型element是值
+    private final HashMap<String, Element> typeElement;
 
     public XmlMapping() throws JDOMException, IOException {
         SAXBuilder saxBuilder = new SAXBuilder();
@@ -31,12 +34,18 @@ public class XmlMapping {
         }
         for (Map.Entry<String, Element> entry : pageElement.entrySet()) {
             System.out.println(entry.getKey());
-            System.out.println(createElementString(entry.getValue()));
+            //System.out.println(createElementString(entry.getValue()));
         }
     }
+
+    //创建页面的字符串
     public String createElementString(Element element) {
 
         StringBuilder stringBuilder = new StringBuilder();
+
+//        if(element==null){
+//            return "";
+//        }
         Iterator it = element.getContent().iterator();
         while (true) {
             Content child;
@@ -47,6 +56,13 @@ public class XmlMapping {
                 child = (Content) it.next();
             } while (!(child instanceof Element) && !(child instanceof Text));
             if (child instanceof Element) {
+                if (((Element) child).getName().equals("form")) {
+                    stringBuilder.append("<div class=\"card-body card-block\">");
+                } else if ((((Element) child).getName().equals("input")&&((Element) child).getAttribute("type").getValue().equals("text"))||((Element) child).getName().equals("select")) {
+                    stringBuilder.append("<div class=\"row form-group\"><div class=\"col col-md-3\"><label for=\"text-input\" class=\" form-control-label\">" +
+                            ((Element) child).getAttribute("name") +
+                            "</label></div><div class=\"col-12 col-md-9\">");
+                }
                 //添加标签头
                 stringBuilder.append("<" + ((Element) child).getName());
                 //添加属性
@@ -55,25 +71,78 @@ public class XmlMapping {
                     stringBuilder.append("\"" + attribute.getValue() + "\"");
 
                 }
+                ///////根据不同的元素添加特别的属性
+                //下拉列表的特殊结构 直接返回就好了
+                if(((Element) child).getName().equals("select")){
+                    stringBuilder.append("class=\"form-control\">");
+                    List<Element>selectList = ((Element) child).getChildren();
+                    Content selectChild;
+                    for(Element optionE : selectList){
+                        stringBuilder.append("<option "+optionE.getAttribute("value").getName()+"=\""+
+                                optionE.getAttribute("value").getValue()+"\">");
+                        stringBuilder.append(optionE.getValue());
+                        stringBuilder.append("</option>");
+                    }
+                    stringBuilder.append("</select>");
+                    stringBuilder.append("</div>");
+                    stringBuilder.append("</div>");
+                    return stringBuilder.toString();
+                }
+                //表单特殊属性
+                if (((Element) child).getName().equals("form")) {
+                    stringBuilder.append("class=\"form-horizontal\"");
+                    //输入框的特殊属性
+                } else if (((Element) child).getName().equals("input") ) {
+                    stringBuilder.append("class=\"form-control\"");
+                }
                 stringBuilder.append(">");
                 //添加标签头完毕 进入递归
                 stringBuilder.append(createElementString((Element) child));
                 //添加标签尾
                 stringBuilder.append("</" + ((Element) child).getName() + " >");
+                stringBuilder.append("</div>");
+                stringBuilder.append("</div>");
 
             }
             if (child instanceof Text) {
-                stringBuilder.append(createTextString((Text) child));
+                //stringBuilder.append(createTextString((Text) child));
             }
         }
     }
 
+    //生成text类型对象的字符串
     public String createTextString(Text text) {
         return text.getValue();
     }
 
+    //获取页面的element
     public Element getElement(String str) {
         return pageElement.get(str);
+    }
+
+    public String createAsideString() {
+        System.out.println("///////////////////////////////////////////////////////");
+        StringBuilder stringBuilder = new StringBuilder();
+        //这里的外层是一个div，从这里是ul开始
+        stringBuilder.append("<ul class=\"nav navbar-nav\">");
+
+        for (Map.Entry<String, Element> entry : typeElement.entrySet()) {
+            //添加种类名称 每一个种类是li
+            stringBuilder.append("<li class=\"menu-item-has-children dropdown\">");
+            stringBuilder.append("<a href=\"#\" class=\"dropdown-toggle\" data-toggle=\"dropdown\" aria-haspopup=\"true\"\n" +
+                    "aria-expanded=\"false\" >" + entry.getKey() + "</a>");
+            //每一个种类还是一个ul 里面的每个页面是一个li
+            stringBuilder.append(" <ul class=\"sub-menu children dropdown-menu\">");
+            System.out.println(entry.getKey());
+            for (Element element : entry.getValue().getChildren()) {
+                stringBuilder.append("<li><a href=\"" + element.getAttribute("url").getValue() + "\">" + element.getAttribute("name").getValue() + "</a></li>");
+                System.out.println(element.getAttribute("name").getValue());
+            }
+            stringBuilder.append("</ul>");
+            stringBuilder.append("</li>");
+        }
+        stringBuilder.append("</ul>");
+        return stringBuilder.toString();
     }
 
     public static void main(String[] args) throws JAXBException, JDOMException, IOException {
@@ -81,7 +150,10 @@ public class XmlMapping {
         new XmlMapping();
         log.info("asdasd");
         XmlMapping xmlMapping = new XmlMapping();
-        Element element = xmlMapping.getElement("queryLogin");
-        System.out.println(xmlMapping.createElementString(element));
+        //Element element = xmlMapping.getElement("queryLogin");
+        //System.out.println(xmlMapping.createElementString(element));
+        System.out.println("//////////////////////////////////////////////////////////////////////");
+        System.out.println(xmlMapping.createElementString(xmlMapping.getElement("queryTrophies")));
+        System.out.println(xmlMapping.createAsideString());
     }
 }
