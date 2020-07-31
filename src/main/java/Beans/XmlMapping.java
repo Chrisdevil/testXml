@@ -58,9 +58,9 @@ public class XmlMapping {
             if (child instanceof Element) {
                 if (((Element) child).getName().equals("form")) {
                     stringBuilder.append("<div class=\"card-body card-block\">");
-                } else if ((((Element) child).getName().equals("input")&&((Element) child).getAttribute("type").getValue().equals("text"))||((Element) child).getName().equals("select")) {
-                    stringBuilder.append("<div class=\"row form-group\"><div class=\"col col-md-3\"><label for=\"text-input\" class=\" form-control-label\">" +
-                            ((Element) child).getAttribute("name") +
+                } else if ((((Element) child).getName().equals("input") && ((Element) child).getAttribute("type").getValue().equals("text")) || ((Element) child).getName().equals("select")) {
+                    stringBuilder.append("<div class=\"row form-group\"><div class=\"col col-md-3\"><label class=\" form-control-label\">" +
+                            ((Element) child).getAttribute("name").getValue() +
                             "</label></div><div class=\"col-12 col-md-9\">");
                 }
                 //添加标签头
@@ -72,36 +72,31 @@ public class XmlMapping {
 
                 }
                 ///////根据不同的元素添加特别的属性
-                //下拉列表的特殊结构 直接返回就好了
-                if(((Element) child).getName().equals("select")){
-                    stringBuilder.append("class=\"form-control\">");
-                    List<Element>selectList = ((Element) child).getChildren();
-                    Content selectChild;
-                    for(Element optionE : selectList){
-                        stringBuilder.append("<option "+optionE.getAttribute("value").getName()+"=\""+
-                                optionE.getAttribute("value").getValue()+"\">");
-                        stringBuilder.append(optionE.getValue());
-                        stringBuilder.append("</option>");
-                    }
-                    stringBuilder.append("</select>");
-                    stringBuilder.append("</div>");
-                    stringBuilder.append("</div>");
-                    return stringBuilder.toString();
-                }
+
+
                 //表单特殊属性
                 if (((Element) child).getName().equals("form")) {
-                    stringBuilder.append("class=\"form-horizontal\"");
+                    stringBuilder.append("class=\"form-horizontal\">");
                     //输入框的特殊属性
-                } else if (((Element) child).getName().equals("input") ) {
-                    stringBuilder.append("class=\"form-control\"");
+                } else if (((Element) child).getName().equals("input") || ((Element) child).getName().equals("select")) {
+                    stringBuilder.append("class=\"form-control\">");
+                } else if (((Element) child).getName().equals("option")) {
+                    stringBuilder.append(">");
+                    stringBuilder.append(child.getValue());
                 }
-                stringBuilder.append(">");
+
                 //添加标签头完毕 进入递归
                 stringBuilder.append(createElementString((Element) child));
                 //添加标签尾
-                stringBuilder.append("</" + ((Element) child).getName() + " >");
-                stringBuilder.append("</div>");
-                stringBuilder.append("</div>");
+                if (!((Element) child).getName().equals("input")) {
+                    stringBuilder.append("</" + ((Element) child).getName() + " >");
+                }
+                if (((Element) child).getName().equals("form")) {
+                    stringBuilder.append("</div>");
+                } else if (!(((Element) child).getName().equals("input") && ((Element) child).getAttribute("type").getValue().equals("submit")) && !((Element) child).getName().equals("option")) {
+                    stringBuilder.append("</div>");
+                    stringBuilder.append("</div>");
+                }
 
             }
             if (child instanceof Text) {

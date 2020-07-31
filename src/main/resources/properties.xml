@@ -28,16 +28,15 @@
             <form name="queryAsset">
                 <input type="text" name="userId">0</input>
                 <input type="text" name="days">0</input>
-                <input type="submit" name="ttt">提交</input>
+
                 <select name="sel">
                     <option value="1">广州</option>
                     <option value="2">深圳</option>
                     <option value="3">山东</option>
                     <option value="4">北京</option>
                 </select>
+                <input type="submit" name="ttt">提交</input>
             </form>
-
-            <text>321321cccc</text>
         </page>
     </pageType>
 </pages>
