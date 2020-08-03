@@ -32,10 +32,10 @@ public class XmlMapping {
                 pageElement.put(pageE.getAttribute("name").getValue(), pageE);
             }
         }
-        for (Map.Entry<String, Element> entry : pageElement.entrySet()) {
-            System.out.println(entry.getKey());
-            //System.out.println(createElementString(entry.getValue()));
-        }
+//        for (Map.Entry<String, Element> entry : pageElement.entrySet()) {
+//            System.out.println(entry.getKey());
+//            //System.out.println(createElementString(entry.getValue()));
+//        }
     }
 
     //创建页面的字符串
@@ -114,12 +114,15 @@ public class XmlMapping {
     public Element getElement(String str) {
         return pageElement.get(str);
     }
-
+    public String createPageString(String pageName){
+        return createElementString(getElement(pageName));
+    }
+    //生成侧边栏的字符串
     public String createAsideString() {
         System.out.println("///////////////////////////////////////////////////////");
         StringBuilder stringBuilder = new StringBuilder();
         //这里的外层是一个div，从这里是ul开始
-        stringBuilder.append("<ul class=\"nav navbar-nav\">");
+        stringBuilder.append("<ul class=\"nav navbar-nav\" style=\"width: 280px\" > ");
 
         for (Map.Entry<String, Element> entry : typeElement.entrySet()) {
             //添加种类名称 每一个种类是li
@@ -128,10 +131,10 @@ public class XmlMapping {
                     "aria-expanded=\"false\" >" + entry.getKey() + "</a>");
             //每一个种类还是一个ul 里面的每个页面是一个li
             stringBuilder.append(" <ul class=\"sub-menu children dropdown-menu\">");
-            System.out.println(entry.getKey());
+            //System.out.println(entry.getKey());
             for (Element element : entry.getValue().getChildren()) {
                 stringBuilder.append("<li><a href=\"" + element.getAttribute("url").getValue() + "\">" + element.getAttribute("name").getValue() + "</a></li>");
-                System.out.println(element.getAttribute("name").getValue());
+                //System.out.println(element.getAttribute("name").getValue());
             }
             stringBuilder.append("</ul>");
             stringBuilder.append("</li>");
@@ -145,10 +148,8 @@ public class XmlMapping {
         new XmlMapping();
         log.info("asdasd");
         XmlMapping xmlMapping = new XmlMapping();
-        //Element element = xmlMapping.getElement("queryLogin");
-        //System.out.println(xmlMapping.createElementString(element));
         System.out.println("//////////////////////////////////////////////////////////////////////");
-        System.out.println(xmlMapping.createElementString(xmlMapping.getElement("queryTrophies")));
+        System.out.println(xmlMapping.createPageString("queryLogin"));
         System.out.println(xmlMapping.createAsideString());
     }
 }

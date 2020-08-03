@@ -5,6 +5,8 @@ import io.vertx.core.AbstractVerticle;
 import io.vertx.core.Promise;
 import io.vertx.core.json.JsonObject;
 import io.vertx.ext.web.Router;
+import io.vertx.ext.web.RoutingContext;
+import io.vertx.ext.web.handler.StaticHandler;
 import io.vertx.ext.web.templ.thymeleaf.ThymeleafTemplateEngine;
 import org.jdom2.JDOMException;
 
@@ -19,14 +21,15 @@ public class TemplateVerticle extends AbstractVerticle {
         xmlMapping= new XmlMapping();
         router = Router.router(vertx);
         thymeleafTemplateEngine = ThymeleafTemplateEngine.create(vertx);
-        router.route("/exe").handler(req -> {
+        //router.route("/static/*").handler(StaticHandler.create());
+        router.route("/queryChest").handler(req -> {
             var obj = new JsonObject();
             String string = xmlMapping.createElementString(xmlMapping.getElement("queryChest"));
-            System.out.println(string);
+            //System.out.println(string);
+            obj.put("sidePanal",xmlMapping.createAsideString());
             obj.put("name", string);
-            obj.put("another", "<form >userId:<input type=text><input type=submit></form>");
             thymeleafTemplateEngine.render(obj,
-                    "Templates/index.html",
+                    "Templates/queryChest.html",
                     bufferAsyncResult -> {
                         req.response()
                                 .putHeader("content-type", "text/html")
@@ -34,14 +37,32 @@ public class TemplateVerticle extends AbstractVerticle {
                     });
 
         });
+        router.route("/queryLogin").handler(req -> {
+            var obj = new JsonObject();
+            String string = xmlMapping.createElementString(xmlMapping.getElement("queryLogin"));
+            //System.out.println(string);
+            obj.put("sidePanal",xmlMapping.createAsideString());
+            obj.put("name", string);
+            thymeleafTemplateEngine.render(obj,
+                    "Templates/queryChest.html",
+                    bufferAsyncResult -> {
+                        req.response()
+                                .putHeader("content-type", "text/html")
+                                .end(bufferAsyncResult.result());
+                    });
 
-        vertx.createHttpServer().requestHandler(router).listen(8890, http -> {
-            if (http.succeeded()) {
-                startPromise.complete();
-                System.out.println("HTTP server started on port 8888");
-            } else {
-                startPromise.fail(http.cause());
-            }
+        });
+        router.route("/queryTrophies").handler(this::handler);
+        vertx.createHttpServer().requestHandler(router).listen(8890);
+    }
+    void handler(RoutingContext context){
+        var obj = new JsonObject();
+        String string = xmlMapping.createElementString(xmlMapping.getElement("queryTrophies"));
+        //System.out.println(string);
+        obj.put("sidePanal",xmlMapping.createAsideString());
+        obj.put("name", string);
+        thymeleafTemplateEngine.render(obj, "Templates/queryChest.html", bufferAsyncResult -> {
+            context.response().putHeader("content-type", "text/html").end(bufferAsyncResult.result());
         });
     }
 }

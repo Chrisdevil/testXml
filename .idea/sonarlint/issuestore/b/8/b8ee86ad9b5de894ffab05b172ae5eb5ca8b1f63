@@ -1,0 +1,24 @@
+
+Q
+java:S37401"/Provide the parametrized type for this generic.(ÜöôØÿÿÿÿÿ8˜ê‘ù¹.
+^	java:S125”"<This block of commented-out lines of code should be removed.(ËÃÄûÿÿÿÿ8˜ê‘ù¹.
+U	java:S106˜"9Replace this use of System.out or System.err by a logger.(ÈŒ‚.8˜ê‘ù¹.
+]	java:S125%"<This block of commented-out lines of code should be removed.(Ä‘éÿûÿÿÿÿ8¾°Šù¹.
+O
+java:S2755"3Disable access to external entities in XML parsing.(ŒüÄD8Í”†î¹.
+d
+java:S1192_"GDefine a constant instead of duplicating this literal "</div>" 3 times.(íˆÎ8¢°ÿı¹.
+X	java:S125."<This block of commented-out lines of code should be removed.(®¸“Ê8¡Ò”ù¹.
+[	java:S106–"9Replace this use of System.out or System.err by a logger.(ÅÎ¼Ÿøÿÿÿÿ8ç×”ø¹.
+Z	java:S106$"9Replace this use of System.out or System.err by a logger.(§Ê°üÿÿÿÿ8¾°Šù¹.
+[	java:S106"9Replace this use of System.out or System.err by a logger.(’À›åşÿÿÿÿ8˜ê‘ù¹.
+V	java:S106—"9Replace this use of System.out or System.err by a logger.(€‚Â¶8˜ê‘ù¹.
+X	java:S125g"<This block of commented-out lines of code should be removed.(Íì“Æ8˜ê‘ù¹.
+Z	java:S106w"9Replace this use of System.out or System.err by a logger.(Ò¶ç¤øÿÿÿÿ8˜ê‘ù¹.
+[	java:S106†"9Replace this use of System.out or System.err by a logger.(¦óøÚıÿÿÿÿ8˜ê‘ù¹.
+v	java:S120"ZRename this package name to match the regular expression '^[a-z_]+(\.[a-z_][a-z0-9_]*)*$'.(¿Õ·ä8êäÿ¸.
+t
+java:S3776*"RRefactor this method to reduce its Cognitive Complexity from 35 to the 15 allowed.(ÃÆëãşÿÿÿÿ8Ş²ïö¹.
+[	java:S106ƒ"9Replace this use of System.out or System.err by a logger.(§Ê°üÿÿÿÿ8˜ê‘ù¹.
+c
+java:S1192="FDefine a constant instead of duplicating this literal "input" 4 times.(ûœšÖ8°°™º.

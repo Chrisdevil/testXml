@@ -1,0 +1,16 @@
+
+S	java:S106"9Replace this use of System.out or System.err by a logger.(Š‡¢Áùÿÿÿÿ
+b	java:S101"MRename this class name to match the regular expression '^[A-Z][a-zA-Z0-9]*$'.(ĞÇÄÚ
+I
+java:S2755"3Disable access to external entities in XML parsing.(©›ï
+N	java:S106"9Replace this use of System.out or System.err by a logger.(÷£Æ
+S	java:S106"9Replace this use of System.out or System.err by a logger.(£ …Åşÿÿÿÿ
+Q	java:S125"<This block of commented-out lines of code should be removed.(æßĞ
+F
+java:S1128
+"+Remove this unused import 'java.util.List'.(Õë±Äøÿÿÿÿ
+‚
+java:S1130"lRemove the declaration of thrown exception 'java.io.IOException', as it cannot be thrown from method's body.(Ã­Ë±
+K
+java:S1128"0Remove this unused import 'org.dom4j.Attribute'.(¤ó¿»ıÿÿÿÿ
+S	java:S106"9Replace this use of System.out or System.err by a logger.(Û×¸¡ùÿÿÿÿ

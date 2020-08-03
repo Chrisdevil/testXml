@@ -2,7 +2,7 @@
 
 <pages>
     <pageType name="Login">
-        <page name="queryLogin" url="queryLogin.html">
+        <page name="queryLogin" url="queryLogin">
             <form name="login" action="www.abc.com">
                 <input type="text" name="userId"/>0
                 <input type="text" name="days"/>0

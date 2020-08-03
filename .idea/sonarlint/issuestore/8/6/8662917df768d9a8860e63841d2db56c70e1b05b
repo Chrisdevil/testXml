@@ -1,0 +1,9 @@
+
+V
+java:S1128	"4Remove this unused import 'org.jdom2.JDOMException'.(ˆ§í»ùÿÿÿÿ8ôë­Î¹.
+Z	java:S106)"9Replace this use of System.out or System.err by a logger.(›Ù’»ýÿÿÿÿ8ôë­Î¹.
+U	java:S106"9Replace this use of System.out or System.err by a logger.(±¤ª¹8ˆñµÎ¹.
+H
+java:S1602",Remove useless curly braces around statement(•±Ô8ôë­Î¹.
+R
+java:S1128"0Remove this unused import 'java.io.IOException'.(ªº»Úýÿÿÿÿ8ôë­Î¹.
