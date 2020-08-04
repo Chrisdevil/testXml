@@ -14,17 +14,15 @@ import java.util.*;
 public class XmlMapping {
 
     //页面名是键 对应的页面的element是值
-    private final HashMap<String, Element> pageElement;
+    private static final HashMap<String, Element> pageElement = new HashMap<>();
     //页面类型是键 对应的类型element是值
-    private final HashMap<String, Element> typeElement;
+    private static final HashMap<String, Element> typeElement = new HashMap<>();
 
     public XmlMapping() throws JDOMException, IOException {
         SAXBuilder saxBuilder = new SAXBuilder();
         Element root = saxBuilder.build("src/main/resources/properties.xml").getDocument().getRootElement();
 
         List<Element> typeList = root.getChildren();
-        pageElement = new HashMap<>();
-        typeElement = new HashMap<>();
         for (Element typeE : typeList) {
             typeElement.put(typeE.getAttribute("name").getValue(), typeE);
             List<Element> pageList = typeE.getChildren();
@@ -114,9 +112,11 @@ public class XmlMapping {
     public Element getElement(String str) {
         return pageElement.get(str);
     }
-    public String createPageString(String pageName){
+
+    public String createPageString(String pageName) {
         return createElementString(getElement(pageName));
     }
+
     //生成侧边栏的字符串
     public String createAsideString() {
         System.out.println("///////////////////////////////////////////////////////");
@@ -126,11 +126,11 @@ public class XmlMapping {
 
         for (Map.Entry<String, Element> entry : typeElement.entrySet()) {
             //添加种类名称 每一个种类是li
-            stringBuilder.append("<li class=\"menu-item-has-children dropdown\">");
+            stringBuilder.append("<li class=\"menu-item-has-children dropdown \" >");
             stringBuilder.append("<a href=\"#\" class=\"dropdown-toggle\" data-toggle=\"dropdown\" aria-haspopup=\"true\"\n" +
                     "aria-expanded=\"false\" >" + entry.getKey() + "</a>");
             //每一个种类还是一个ul 里面的每个页面是一个li
-            stringBuilder.append(" <ul class=\"sub-menu children dropdown-menu\" style=\"padding-left: 0px\">");
+            stringBuilder.append(" <ul class=\"sub-menu children dropdown-menu \" style=\"padding-left: 0px\">");
             //System.out.println(entry.getKey());
             for (Element element : entry.getValue().getChildren()) {
                 stringBuilder.append("<li><a href=\"" + element.getAttribute("url").getValue() + "\">" + element.getAttribute("name").getValue() + "</a></li>");
