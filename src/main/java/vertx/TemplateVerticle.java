@@ -21,47 +21,32 @@ public class TemplateVerticle extends AbstractVerticle {
         xmlMapping= new XmlMapping();
         router = Router.router(vertx);
         thymeleafTemplateEngine = ThymeleafTemplateEngine.create(vertx);
-        //router.route("/static/*").handler(StaticHandler.create());
-        router.route("/queryChest").handler(req -> {
-            var obj = new JsonObject();
-            String string = xmlMapping.createElementString(xmlMapping.getElement("queryChest"));
-            //System.out.println(string);
-            obj.put("sidePanal",xmlMapping.createAsideString());
-            obj.put("name", string);
-            thymeleafTemplateEngine.render(obj,
-                    "Templates/queryChest.html",
-                    bufferAsyncResult -> {
-                        req.response()
-                                .putHeader("content-type", "text/html")
-                                .end(bufferAsyncResult.result());
-                    });
-
-        });
-        router.route("/queryLogin").handler(req -> {
-            var obj = new JsonObject();
-            String string = xmlMapping.createElementString(xmlMapping.getElement("queryLogin"));
-            //System.out.println(string);
-            obj.put("sidePanal",xmlMapping.createAsideString());
-            obj.put("name", string);
-            thymeleafTemplateEngine.render(obj,
-                    "Templates/queryChest.html",
-                    bufferAsyncResult -> {
-                        req.response()
-                                .putHeader("content-type", "text/html")
-                                .end(bufferAsyncResult.result());
-                    });
-
-        });
-        router.route("/queryTrophies").handler(this::handler);
+        router.route("/queryChest").handler(this::ChestHandler);
+        router.route("/queryLogin").handler(this::LoginHandler);
+        router.route("/queryTrophies").handler(this::trophiesHandler);
         vertx.createHttpServer().requestHandler(router).listen(8890);
     }
-    void handler(RoutingContext context){
+    void LoginHandler(RoutingContext context){
         var obj = new JsonObject();
-        String string = xmlMapping.createElementString(xmlMapping.getElement("queryTrophies"));
-        //System.out.println(string);
         obj.put("sidePanal",xmlMapping.createAsideString());
-        obj.put("name", string);
+        obj.put("name", xmlMapping.createElementString(xmlMapping.getElement("queryLogin")));
+        thymeleafTemplateEngine.render(obj, "Templates/queryLogin.html", bufferAsyncResult -> {
+            context.response().putHeader("content-type", "text/html").end(bufferAsyncResult.result());
+        });
+    }
+    void ChestHandler(RoutingContext context){
+        var obj = new JsonObject();
+        obj.put("sidePanal",xmlMapping.createAsideString());
+        obj.put("name", xmlMapping.createElementString(xmlMapping.getElement("queryChest")));
         thymeleafTemplateEngine.render(obj, "Templates/queryChest.html", bufferAsyncResult -> {
+            context.response().putHeader("content-type", "text/html").end(bufferAsyncResult.result());
+        });
+    }
+    void trophiesHandler(RoutingContext context){
+        var obj = new JsonObject();
+        obj.put("sidePanal",xmlMapping.createAsideString());
+        obj.put("name", xmlMapping.createElementString(xmlMapping.getElement("queryTrophies")));
+        thymeleafTemplateEngine.render(obj, "Templates/queryTrophies.html", bufferAsyncResult -> {
             context.response().putHeader("content-type", "text/html").end(bufferAsyncResult.result());
         });
     }

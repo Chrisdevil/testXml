@@ -130,7 +130,7 @@ public class XmlMapping {
             stringBuilder.append("<a href=\"#\" class=\"dropdown-toggle\" data-toggle=\"dropdown\" aria-haspopup=\"true\"\n" +
                     "aria-expanded=\"false\" >" + entry.getKey() + "</a>");
             //每一个种类还是一个ul 里面的每个页面是一个li
-            stringBuilder.append(" <ul class=\"sub-menu children dropdown-menu\">");
+            stringBuilder.append(" <ul class=\"sub-menu children dropdown-menu\" style=\"padding-left: 0px\">");
             //System.out.println(entry.getKey());
             for (Element element : entry.getValue().getChildren()) {
                 stringBuilder.append("<li><a href=\"" + element.getAttribute("url").getValue() + "\">" + element.getAttribute("name").getValue() + "</a></li>");
