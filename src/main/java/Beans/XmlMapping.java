@@ -143,6 +143,12 @@ public class XmlMapping {
         return stringBuilder.toString();
     }
 
+    public List<String> createPageNameList() {
+        List<String> nameList = new ArrayList<>();
+        nameList.addAll(pageElement.keySet());
+        return nameList;
+    }
+
     public static void main(String[] args) throws JAXBException, JDOMException, IOException {
         System.out.println("\"");
         new XmlMapping();

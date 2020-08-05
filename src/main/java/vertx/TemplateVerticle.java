@@ -9,9 +9,10 @@ import io.vertx.ext.web.RoutingContext;
 import io.vertx.ext.web.handler.StaticHandler;
 import io.vertx.ext.web.templ.thymeleaf.ThymeleafTemplateEngine;
 import lombok.extern.slf4j.Slf4j;
-import org.jdom2.JDOMException;
 
-import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
+
 @Slf4j
 public class TemplateVerticle extends AbstractVerticle {
     Router router;
@@ -25,36 +26,17 @@ public class TemplateVerticle extends AbstractVerticle {
         router = Router.router(vertx);
         thymeleafTemplateEngine = ThymeleafTemplateEngine.create(vertx);
         router.route().handler(StaticHandler.create());
-        router.route("/main/queryChest").handler(this::ChestHandler);
-        router.route("/main/queryLogin").handler(this::LoginHandler);
-        router.route("/main/queryTrophies").handler(this::trophiesHandler);
+        List<String>pageList = xmlMapping.createPageNameList();
+        for(String pageRouter: pageList ){
+            router.route("/main/"+pageRouter).handler(ctx->{
+                var obj = new JsonObject();
+                obj.put("sidePanal", xmlMapping.createAsideString());
+                obj.put("name", xmlMapping.createElementString(xmlMapping.getElement(pageRouter)));
+                thymeleafTemplateEngine.render(obj, "Templates/queryLogin.html", bufferAsyncResult -> {
+                    ctx.response().putHeader("content-type", "text/html").end(bufferAsyncResult.result());
+                });
+            });
+        }
         vertx.createHttpServer().requestHandler(router).listen(8890);
-    }
-
-    void LoginHandler(RoutingContext context) {
-        var obj = new JsonObject();
-        obj.put("sidePanal", xmlMapping.createAsideString());
-        obj.put("name", xmlMapping.createElementString(xmlMapping.getElement("queryLogin")));
-        thymeleafTemplateEngine.render(obj, "Templates/queryLogin.html", bufferAsyncResult -> {
-            context.response().putHeader("content-type", "text/html").end(bufferAsyncResult.result());
-        });
-    }
-
-    void ChestHandler(RoutingContext context) {
-        var obj = new JsonObject();
-        obj.put("sidePanal", xmlMapping.createAsideString());
-        obj.put("name", xmlMapping.createElementString(xmlMapping.getElement("queryChest")));
-        thymeleafTemplateEngine.render(obj, "Templates/queryLogin.html", bufferAsyncResult -> {
-            context.response().putHeader("content-type", "text/html").end(bufferAsyncResult.result());
-        });
-    }
-
-    void trophiesHandler(RoutingContext context) {
-        var obj = new JsonObject();
-        obj.put("sidePanal", xmlMapping.createAsideString());
-        obj.put("name", xmlMapping.createElementString(xmlMapping.getElement("queryTrophies")));
-        thymeleafTemplateEngine.render(obj, "Templates/queryLogin.html", bufferAsyncResult -> {
-            context.response().putHeader("content-type", "text/html").end(bufferAsyncResult.result());
-        });
     }
 }
