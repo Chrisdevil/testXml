@@ -60,11 +60,11 @@ public class XmlMapping {
         if (str.equals("ti")) {
             int order = random.nextInt(iconTiList.size());
             iconString = iconTiList.get(order);
-            iconTiList.remove(order);
+            //iconTiList.remove(order);
         }else{
             int order = random.nextInt(iconFaList.size());
             iconString = iconFaList.get(order);
-            iconFaList.remove(order);
+            //iconFaList.remove(order);
         }
 
         return iconString;
