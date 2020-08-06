@@ -24,7 +24,7 @@ public class TemplateVerticle extends AbstractVerticle {
     public void start(Promise<Void> startPromise) throws Exception {
         xmlMapping = new XmlMapping();
         router = Router.router(vertx);
-        String asideString = xmlMapping.createAsideString();
+        String asideString = xmlMapping.createAsideString("ssss");
         thymeleafTemplateEngine = ThymeleafTemplateEngine.create(vertx);
         router.route().handler(StaticHandler.create());
         List<String>pageList = xmlMapping.createPageNameList();

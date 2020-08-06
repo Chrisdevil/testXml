@@ -165,8 +165,13 @@ public class XmlMapping {
             //System.out.println(entry.getKey());style="padding-left: 0px"
             int ID = 1;
             for (Element element : entry.getValue().getChildren()) {
-                stringBuilder.append("<li id><i class=\"menu-icon " + createIconString("ti") + "\"></i><a href=\"" + element.getAttribute("url").getValue() + "\">" + element.getAttribute("name").getValue() + "</a></li>");
-                //System.out.println(element.getAttribute("name").getValue());
+                if(element.getAttribute("url")!=null) {
+                    stringBuilder.append("<li id><i class=\"menu-icon " + createIconString("ti") + "\"></i><a href=\"" + element.getAttribute("url").getValue() + "\">" + element.getAttribute("name").getValue() + "</a></li>");
+                    //System.out.println(element.getAttribute("name").getValue());
+                }else{
+                    stringBuilder.append("<li id><i class=\"menu-icon " + createIconString("ti") + "\"></i><a href=\"#\">" + element.getAttribute("name").getValue() + "</a></li>");
+
+                }
             }
             stringBuilder.append("</ul>");
             stringBuilder.append("</li>");
@@ -174,7 +179,34 @@ public class XmlMapping {
         stringBuilder.append("</ul>");
         return stringBuilder.toString();
     }
+    public String createAsideString(String string){
+        StringBuilder stringBuilder = new StringBuilder();
+        //从外层div开始 div类是navigation-menu-body
+        //这是最外层的ul
+        stringBuilder.append("<ul>");
+        //这个是最大类别 暂时没什么用
+        stringBuilder.append("<li class=\"navigation-divider\">最大类别</li>");
+        for(Map.Entry<String,Element>entry:typeElement.entrySet()){
+            stringBuilder.append("<li> <a href=\"");
+            if(entry.getValue().getAttribute("url")!=null){
+                stringBuilder.append(entry.getValue().getAttribute("url")+"\">");
+            }
+            else{
+                stringBuilder.append("#\">");
+            }
+            stringBuilder.append("<ul>");
+            for(Element element :entry.getValue().getChildren()){
+                stringBuilder.append("<li><a href=\""+element.getAttribute("url").getValue()+"\">"+ element.getAttribute("name").getValue() + "</a></li>");
 
+            }
+            stringBuilder.append("</ul>");
+            stringBuilder.append("</li>");
+
+        }
+        stringBuilder.append("</ul>");
+
+        return stringBuilder.toString();
+    }
     public List<String> createPageNameList() {
         List<String> nameList = new ArrayList<>();
         nameList.addAll(pageElement.keySet());
@@ -186,6 +218,7 @@ public class XmlMapping {
         new XmlMapping();
         log.info("asdasd");
         XmlMapping xmlMapping = new XmlMapping();
+        System.out.println(xmlMapping.createAsideString("aaa"));
         System.out.println("//////////////////////////////////////////////////////////////////////");
         System.out.println(xmlMapping.createPageString("queryLogin"));
         System.out.println(xmlMapping.createAsideString());
