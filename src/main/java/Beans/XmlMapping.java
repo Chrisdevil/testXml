@@ -17,6 +17,8 @@ public class XmlMapping {
     private static final HashMap<String, Element> pageElement = new HashMap<>();
     //页面类型是键 对应的类型element是值
     private static final HashMap<String, Element> typeElement = new HashMap<>();
+    private static final List<String> iconTiList = new ArrayList<>();
+    private static final List<String> iconFaList = new ArrayList<>();
 
     public XmlMapping() throws JDOMException, IOException {
         SAXBuilder saxBuilder = new SAXBuilder();
@@ -30,10 +32,42 @@ public class XmlMapping {
                 pageElement.put(pageE.getAttribute("name").getValue(), pageE);
             }
         }
-//        for (Map.Entry<String, Element> entry : pageElement.entrySet()) {
-//            System.out.println(entry.getKey());
-//            //System.out.println(createElementString(entry.getValue()));
-//        }
+        iconTiList.add("ti-heart");
+        iconTiList.add("ti-folder");
+        iconTiList.add("ti-export");
+        iconTiList.add("ti-eye");
+        iconTiList.add("ti-crown");
+        iconTiList.add("ti-comment");
+        iconTiList.add("ti-camera");
+        iconTiList.add("ti-zip");
+        iconTiList.add("ti-truck");
+        iconTiList.add("ti-printer");
+        iconFaList.add("fa-safari");
+        iconFaList.add("fa-chrome");
+        iconFaList.add("fa-firefox");
+        iconFaList.add("fa-opera");
+        iconFaList.add("fa-contao");
+        iconFaList.add("fa-industry");
+        iconFaList.add("fa-map");
+        iconFaList.add("fa-vimeo");
+        iconFaList.add("fa-edge");
+        iconFaList.add("fa-modx");
+    }
+
+    private String createIconString(String str) {
+        String iconString;
+        Random random = new Random();
+        if (str.equals("ti")) {
+            int order = random.nextInt(iconTiList.size());
+            iconString = iconTiList.get(order);
+            iconTiList.remove(order);
+        }else{
+            int order = random.nextInt(iconFaList.size());
+            iconString = iconFaList.get(order);
+            iconFaList.remove(order);
+        }
+
+        return iconString;
     }
 
     //创建页面的字符串
@@ -128,12 +162,12 @@ public class XmlMapping {
             //添加种类名称 每一个种类是li
             stringBuilder.append("<li class=\"menu-item-has-children dropdown \" >");
             stringBuilder.append("<a href=\"#\" class=\"dropdown-toggle\" data-toggle=\"dropdown\" aria-haspopup=\"true\"\n" +
-                    "aria-expanded=\"false\" >" + entry.getKey() + "</a>");
+                    "aria-expanded=\"false\" ><i class=\"menu-icon fa " + createIconString("fa") + "\"></i>" + entry.getKey() + "</a>");
             //每一个种类还是一个ul 里面的每个页面是一个li
-            stringBuilder.append(" <ul class=\"sub-menu children dropdown-menu \" style=\"padding-left: 0px\">");
-            //System.out.println(entry.getKey());
+            stringBuilder.append(" <ul class=\"sub-menu children dropdown-menu \" >");
+            //System.out.println(entry.getKey());style="padding-left: 0px"
             for (Element element : entry.getValue().getChildren()) {
-                stringBuilder.append("<li><a href=\"" + element.getAttribute("url").getValue() + "\">" + element.getAttribute("name").getValue() + "</a></li>");
+                stringBuilder.append("<li><i class=\"menu-icon " + createIconString("ti") + "\"></i><a href=\"" + element.getAttribute("url").getValue() + "\">" + element.getAttribute("name").getValue() + "</a></li>");
                 //System.out.println(element.getAttribute("name").getValue());
             }
             stringBuilder.append("</ul>");
