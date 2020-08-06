@@ -153,7 +153,7 @@ public class XmlMapping {
         //这里的外层是一个div，从这里是ul开始
         stringBuilder.append("<ul class=\"nav navbar-nav\" style=\"width: 280px\" > ");
         //类别使用name作为序号
-        int name=0;
+        int name=1;
         for (Map.Entry<String, Element> entry : typeElement.entrySet()) {
             //添加种类名称 每一个种类是li
             stringBuilder.append("<li class=\"menu-item-has-children dropdown  name= \""+name+"\" \" >");
@@ -163,7 +163,7 @@ public class XmlMapping {
             //每一个种类还是一个ul 里面的每个页面是一个li
             stringBuilder.append(" <ul class=\"sub-menu children dropdown-menu \" >");
             //System.out.println(entry.getKey());style="padding-left: 0px"
-            int ID = 0;
+            int ID = 1;
             for (Element element : entry.getValue().getChildren()) {
                 stringBuilder.append("<li id><i class=\"menu-icon " + createIconString("ti") + "\"></i><a href=\"" + element.getAttribute("url").getValue() + "\">" + element.getAttribute("name").getValue() + "</a></li>");
                 //System.out.println(element.getAttribute("name").getValue());
