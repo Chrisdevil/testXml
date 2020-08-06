@@ -17,8 +17,8 @@ public class XmlMapping {
     private static final HashMap<String, Element> pageElement = new HashMap<>();
     //页面类型是键 对应的类型element是值
     private static final HashMap<String, Element> typeElement = new HashMap<>();
-    private static final List<String> iconTiList = new ArrayList<>();
-    private static final List<String> iconFaList = new ArrayList<>();
+    private static final Queue<String> iconTiList = new LinkedList<>();
+    private static final Queue<String> iconFaList = new LinkedList<>();
 
     public XmlMapping() throws JDOMException, IOException {
         SAXBuilder saxBuilder = new SAXBuilder();
@@ -58,12 +58,12 @@ public class XmlMapping {
         String iconString;
         Random random = new Random();
         if (str.equals("ti")) {
-            int order = random.nextInt(iconTiList.size());
-            iconString = iconTiList.get(order);
+
+            iconString = iconTiList.poll();
             //iconTiList.remove(order);
         }else{
             int order = random.nextInt(iconFaList.size());
-            iconString = iconFaList.get(order);
+            iconString = iconFaList.poll();
             //iconFaList.remove(order);
         }
 
@@ -72,12 +72,7 @@ public class XmlMapping {
 
     //创建页面的字符串
     public String createElementString(Element element) {
-
         StringBuilder stringBuilder = new StringBuilder();
-
-//        if(element==null){
-//            return "";
-//        }
         Iterator it = element.getContent().iterator();
         while (true) {
             Content child;
@@ -157,17 +152,20 @@ public class XmlMapping {
         StringBuilder stringBuilder = new StringBuilder();
         //这里的外层是一个div，从这里是ul开始
         stringBuilder.append("<ul class=\"nav navbar-nav\" style=\"width: 280px\" > ");
-
+        //类别使用name作为序号
+        int name=0;
         for (Map.Entry<String, Element> entry : typeElement.entrySet()) {
             //添加种类名称 每一个种类是li
-            stringBuilder.append("<li class=\"menu-item-has-children dropdown \" >");
+            stringBuilder.append("<li class=\"menu-item-has-children dropdown  name= \""+name+"\" \" >");
+            name++;
             stringBuilder.append("<a href=\"#\" class=\"dropdown-toggle\" data-toggle=\"dropdown\" aria-haspopup=\"true\"\n" +
                     "aria-expanded=\"false\" ><i class=\"menu-icon fa " + createIconString("fa") + "\"></i>" + entry.getKey() + "</a>");
             //每一个种类还是一个ul 里面的每个页面是一个li
             stringBuilder.append(" <ul class=\"sub-menu children dropdown-menu \" >");
             //System.out.println(entry.getKey());style="padding-left: 0px"
+            int ID = 0;
             for (Element element : entry.getValue().getChildren()) {
-                stringBuilder.append("<li><i class=\"menu-icon " + createIconString("ti") + "\"></i><a href=\"" + element.getAttribute("url").getValue() + "\">" + element.getAttribute("name").getValue() + "</a></li>");
+                stringBuilder.append("<li id><i class=\"menu-icon " + createIconString("ti") + "\"></i><a href=\"" + element.getAttribute("url").getValue() + "\">" + element.getAttribute("name").getValue() + "</a></li>");
                 //System.out.println(element.getAttribute("name").getValue());
             }
             stringBuilder.append("</ul>");

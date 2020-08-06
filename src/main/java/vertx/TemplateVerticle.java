@@ -24,13 +24,14 @@ public class TemplateVerticle extends AbstractVerticle {
     public void start(Promise<Void> startPromise) throws Exception {
         xmlMapping = new XmlMapping();
         router = Router.router(vertx);
+        String asideString = xmlMapping.createAsideString();
         thymeleafTemplateEngine = ThymeleafTemplateEngine.create(vertx);
         router.route().handler(StaticHandler.create());
         List<String>pageList = xmlMapping.createPageNameList();
         for(String pageRouter: pageList ){
             router.route("/main/"+pageRouter).handler(ctx->{
                 var obj = new JsonObject();
-                obj.put("sidePanal", xmlMapping.createAsideString());
+                obj.put("sidePanal", asideString);
                 obj.put("name", xmlMapping.createElementString(xmlMapping.getElement(pageRouter)));
                 thymeleafTemplateEngine.render(obj, "Templates/queryLogin.html", bufferAsyncResult -> {
                     ctx.response().putHeader("content-type", "text/html").end(bufferAsyncResult.result());
