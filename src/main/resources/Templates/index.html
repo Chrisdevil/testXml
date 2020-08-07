@@ -30,43 +30,87 @@
     <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,600,700,800' rel='stylesheet' type='text/css'>
 
     <!-- <script type="text/javascript" src="https://cdn.jsdelivr.net/html5shiv/3.7.3/html5shiv.min.js"></script> -->
+    <!-- Favicon -->
+    <link rel="shortcut icon" href="../webroot/assets/media/image/favicon.png"/>
 
+    <!-- Plugin styles -->
+    <link rel="stylesheet" href="../webroot/vendors/bundle.css" type="text/css">
+
+    <!-- Prism -->
+    <link rel="stylesheet" href="../webroot/vendors/prism/prism.css" type="text/css">
+
+    <!-- App styles -->
+    <link rel="stylesheet" href="../webroot/assets/css/app.min.css" type="text/css">
 </head>
 <body>
 <!-- Left Panel -->
-<p th:text="${htmlString}"></p>
-<aside id="left-panel" class="left-panel">
-    <nav class="navbar navbar-expand-sm navbar-default" style="width: 280px">
 
+<aside class="navigation left-panel">
+
+    <!-- begin::logo -->
+    <div id="logo">
+        <a href="index.html">
+            <img class="logo" src="/assets/media/image/logo.png" alt="logo">
+            <img class="logo-sm" src=/"assets/media/image/logo-sm.png" alt="small logo">
+            <img class="logo-dark" src="../webroot/assets/media/image/logo-dark.png" alt="dark logo">
+        </a>
+    </div>
+    <!-- end::logo -->
+
+    <!-- begin::navigation header -->
+    <header class="navigation-header">
+        <div>
+            <h5>Nikos Pedlow</h5>
+            <p class="text-muted">Administrator</p>
+            <ul class="nav">
+                <li class="nav-item">
+                    <a href="login.html" class="btn nav-link bg-danger-bright" title="Logout" data-toggle="tooltip">
+                        <i data-feather="log-out"></i>
+                    </a>
+                </li>
+            </ul>
+        </div>
+    </header>
+    <!-- end::navigation header -->
+
+    <!-- begin::navigation menu -->
+    <div class="navigation-menu-body">
         <ul>
             <li class="navigation-divider">最大类别</li>
-            <li><a href="#">
+            <li><a href="#">Trophies</a>
                 <ul>
-                    <li><a href="queryTrophies>queryTrophies</a></li></ul></li><li> <a href=" #">
-                        <ul>
-                            <li><a href="queryLogin>queryLogin</a></li><li><a href=" queryChest>queryChest</a></li>
-                        </ul>
-                    </li>
+                    <li name=" queryTrophies"><a href="queryTrophies">queryTrophies</a></li>
                 </ul>
+            </li>
+            <li><a href="#">Login</a>
+                <ul>
+                    <li name=" queryLogin"><a href="queryLogin">queryLogin</a></li>
+                    <li name=" queryChest"><a href="queryChest">queryChest</a></li>
+                </ul>
+            </li>
+        </ul>
 
-    </nav>
-</aside><!-- /#left-panel -->
+
+    </div>
+    <!-- end::navigation menu -->
+
+</aside>
+<!-- /#left-panel -->
 
 <!-- Left Panel -->
 
 <!-- Right Panel -->
 
-<div id="right-panel" class="right-panel">
+<div id="right-panel" class="right-panel" style="width: 1000px;margin: 35px auto">
 
     <!-- Header-->
     <header id="header" class="header">
         <div class="top-left">
             <div class="navbar-header">
-                <a class="navbar-brand" href="../../webapp/WEB-INF"><img src="../webroot/images/logo.png"
+                <a class="navbar-brand" href="../../webapp/WEB-INF"><img src="/images/logo.png"
                                                                          alt="Logo"></a>
-                <a class="navbar-brand hidden" href="../../webapp/WEB-INF"><img src="../webroot/images/logo2.png"
+                <a class="navbar-brand hidden" href="../../webapp/WEB-INF"><img src="/images/logo2.png"
                                                                                 alt="Logo"></a>
-                <a id="menuToggle" class="menutoggle"><i class="fa fa-bars"></i></a>
             </div>
         </div>
         <div class="top-right">
@@ -175,7 +219,7 @@
     <!-- Header-->
 
 
-    <div class="content">
+    <div class="content" style="margin: auto">
         <div class="animated fadeIn">
 
 
@@ -224,7 +268,13 @@
 <script src="https://cdn.jsdelivr.net/npm/jquery-match-height@0.7.2/dist/jquery.matchHeight.min.js"></script>
 <script src="../webroot/assets/js/main.js"></script>
 
+<script src="../webroot/vendors/bundle.js"></script>
 
+<!-- Prism -->
+<script src="../webroot/vendors/prism/prism.js"></script>
+
+<!-- App scripts -->
+<script src="../webroot/assets/js/app.min.js"></script>
 </body>
 </html>
 

@@ -32,6 +32,7 @@ public class TemplateVerticle extends AbstractVerticle {
             router.route("/main/"+pageRouter).handler(ctx->{
                 var obj = new JsonObject();
                 obj.put("sidePanal", asideString);
+                obj.put("pagename",pageRouter);
                 obj.put("name", xmlMapping.createElementString(xmlMapping.getElement(pageRouter)));
                 thymeleafTemplateEngine.render(obj, "Templates/queryLogin.html", bufferAsyncResult -> {
                     ctx.response().putHeader("content-type", "text/html").end(bufferAsyncResult.result());

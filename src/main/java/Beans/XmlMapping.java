@@ -194,9 +194,10 @@ public class XmlMapping {
             else{
                 stringBuilder.append("#\">");
             }
+            stringBuilder.append(entry.getKey()+"</a>");
             stringBuilder.append("<ul>");
             for(Element element :entry.getValue().getChildren()){
-                stringBuilder.append("<li><a href=\""+element.getAttribute("url").getValue()+"\">"+ element.getAttribute("name").getValue() + "</a></li>");
+                stringBuilder.append("<li id =\" "+element.getAttribute("name").getValue()+"\"><a href=\""+element.getAttribute("url").getValue()+"\">"+ element.getAttribute("name").getValue() + "</a></li>");
 
             }
             stringBuilder.append("</ul>");
