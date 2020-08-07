@@ -73,6 +73,7 @@ public class XmlMapping {
     //创建页面的字符串
     public String createElementString(Element element) {
         StringBuilder stringBuilder = new StringBuilder();
+
         Iterator it = element.getContent().iterator();
         while (true) {
             Content child;
