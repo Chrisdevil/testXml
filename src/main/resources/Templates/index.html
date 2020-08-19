@@ -52,7 +52,7 @@
         <a href="index.html">
             <img class="logo" src="/assets/media/image/logo.png" alt="logo">
             <img class="logo-sm" src=/"assets/media/image/logo-sm.png" alt="small logo">
-            <img class="logo-dark" src="../webroot/assets/media/image/logo-dark.png" alt="dark logo">
+            <img class="logo-dark" src="/assets/media/image/logo-dark.png" alt="dark logo">
         </a>
     </div>
     <!-- end::logo -->
@@ -79,13 +79,13 @@
             <li class="navigation-divider">最大类别</li>
             <li><a href="#">Trophies</a>
                 <ul>
-                    <li name=" queryTrophies"><a href="queryTrophies">queryTrophies</a></li>
+                    <li name=" queryTrophies"><a href="last1">queryTrophies</a></li>
                 </ul>
             </li>
             <li><a href="#">Login</a>
                 <ul>
-                    <li name=" queryLogin"><a href="queryLogin">queryLogin</a></li>
-                    <li name=" queryChest"><a href="queryChest">queryChest</a></li>
+                    <li name=" queryLogin"><a href="last2">queryLogin</a></li>
+                    <li name=" queryChest"><a href="last3">queryChest</a></li>
                 </ul>
             </li>
         </ul>
@@ -229,7 +229,8 @@
                 <div class="col-lg-6" style="flex: 0 0 auto;max-width: 100%">
                     <div class="card">
                         <div class="card-header">
-                            <strong>Basic Form</strong> Elements
+                            <strong><p th:text="${title}"></p></strong>
+                            <p th:text="${sedtitle}"></p>
                         </div>
                         <div class="card-body card-block">
                             <form name="queryAsset" class="form-horizontal">
@@ -255,6 +256,8 @@
                                 <div class="row form-group">
                                     <div class="col col-md-3"><label class=" form-control-label">ttt</label></div>
                                     <div class="col-12 col-md-9"><input type="submit" name="ttt" class="form-control">
+                                    </div>
+                                </div>
                             </form>
                         </div>
 
@@ -278,15 +281,15 @@
 <script src="https://cdn.jsdelivr.net/npm/popper.js@1.14.4/dist/umd/popper.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.1.3/dist/js/bootstrap.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/jquery-match-height@0.7.2/dist/jquery.matchHeight.min.js"></script>
-<script src="../webroot/assets/js/main.js"></script>
+<script src="/assets/js/main.js"></script>
 
-<script src="../webroot/vendors/bundle.js"></script>
+<script src="/vendors/bundle.js"></script>
 
 <!-- Prism -->
-<script src="../webroot/vendors/prism/prism.js"></script>
+<script src="/vendors/prism/prism.js"></script>
 
 <!-- App scripts -->
-<script src="../webroot/assets/js/app.min.js"></script>
+<script src="/assets/js/app.min.js"></script>
 </body>
 </html>
 

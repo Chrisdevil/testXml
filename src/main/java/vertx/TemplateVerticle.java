@@ -26,7 +26,7 @@ public class TemplateVerticle extends AbstractVerticle {
         router = Router.router(vertx);
         String asideString = xmlMapping.createAsideString("ssss");
         thymeleafTemplateEngine = ThymeleafTemplateEngine.create(vertx);
-        router.route().handler(StaticHandler.create());
+        router.route("/static/*").handler(StaticHandler.create());
         List<String>pageList = xmlMapping.createPageNameList();
         for(String pageRouter: pageList ){
             router.route("/main/"+pageRouter).handler(ctx->{
